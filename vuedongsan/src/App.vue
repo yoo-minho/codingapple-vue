@@ -19,7 +19,8 @@ export default {
     return {
       price1: 60,
       price2: 70,
-      products: ['천호동 원룸', '역삼동 원룸', '마포구 원룸']
+      menus: ['Home','Products', 'About'],
+      products: ['천호동 원룸', '역삼동 원룸', '마포구 원룸', '효창동 원룸']
     }
   },
   components: {}
