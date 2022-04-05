@@ -1,25 +1,32 @@
 <template>
-  <div v-if="모달창열렸니" class="black-bg" >
+  <div v-if="모달창열렸니" class="black-bg">
     <div class="white-bg">
-      <h4>상세페이지임</h4>
-      <p>상세페이지 내용임</p>
+      <img :src="products[누른거].image" class="room-img">
+      <h4>{{ products[누른거].title }}</h4>
+      <p>{{ products[누른거].content }}</p>
+      <p>{{ products[누른거].price }} 원</p>
       <button @click="모달창열렸니=false">닫기</button>
     </div>
   </div>
+
   <div class="menu">
     <a v-for="(v, i) in ['Home','Products', 'About']" :key="i">{{ v }}</a>
   </div>
 
-  <div v-for="v in products" :key="v.id">
+  <Discount/>
+
+  <div v-for="(v, i) in products" :key="v.id">
     <img :src="v.image" class="room-img">
-    <h4 @click="모달창열렸니=true">{{ v.title }}</h4>
-    <p>{{v.content}}</p>
-    <p>{{v.price}}</p>
+    <h4 @click="모달창열렸니=true; 누른거=i">{{ v.title }}</h4>
+    <p>{{ v.content }}</p>
+    <p>{{ v.price }}</p>
   </div>
 </template>
 
 <script>
 import data from './assets/data.js'
+import Discount from "@/components/Discount";
+
 export default {
   name: 'App',
   data() {
@@ -29,6 +36,7 @@ export default {
       price2: 70,
       신고수: [0, 0, 0],
       menus: ['Home', 'Products', 'About'],
+      누른거: 0,
       products: data
     }
   },
@@ -36,9 +44,8 @@ export default {
     increase() {
       this.신고수 += 1
     }
-
   },
-  components: {}
+  components: {Discount}
 }
 </script>
 
