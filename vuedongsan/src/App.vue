@@ -1,6 +1,9 @@
 <template>
-  <Modal :products="products" :누른거="누른거" :모달창열렸니="모달창열렸니"
-         @closeModal="모달창열렸니 = false"/>
+
+  <transition name="fade">
+    <Modal :products="products" :누른거="누른거" :모달창열렸니="모달창열렸니"
+           @closeModal="모달창열렸니 = false"/>
+  </transition>
 
   <div class="menu">
     <a v-for="(v, i) in ['Home','Products', 'About']" :key="i">{{ v }}</a>
@@ -75,5 +78,31 @@ div {
 .room-img {
   width: 100%;
   margin-top: 40px;
+}
+
+.fade-enter-from {
+  transform: translateY(-1000px);
+  opacity: 0;
+}
+
+.fade-enter-active {
+  transition: all 1s;
+}
+
+.fade-enter-to {
+  transform: translateY(0px);
+  opacity: 1;
+}
+
+.fade-leave-from {
+  opacity: 1;
+}
+
+.fade-leave-active {
+  transition: all 1s;
+}
+
+.fade-leave-to {
+  opacity: 0;
 }
 </style>
