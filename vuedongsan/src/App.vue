@@ -11,6 +11,8 @@
 
   <Discount/>
 
+  <button @click="sortPrice">가격순정렬</button>
+
   <Card
       v-for="v in products"
       :key="v.id"
@@ -41,6 +43,9 @@ export default {
   methods: {
     increase() {
       this.신고수 += 1
+    },
+    sortPrice() {
+      this.products.sort((a, b) => a - b);
     }
   },
   components: {Card, Modal, Discount}
