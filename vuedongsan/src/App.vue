@@ -12,6 +12,7 @@
   <Discount/>
 
   <button @click="sortPrice">가격순정렬</button>
+  <button @click="sortBack">되돌리기</button>
 
   <Card
       v-for="v in products"
@@ -37,15 +38,19 @@ export default {
       신고수: [0, 0, 0],
       menus: ['Home', 'Products', 'About'],
       누른거: 0,
-      products: data
+      products: data,
+      originProducts: '',
     }
   },
   methods: {
     increase() {
-      this.신고수 += 1
+      this.신고수 += 1;
+    },
+    sortBack() {
+
     },
     sortPrice() {
-      this.products.sort((a, b) => a - b);
+      this.products.sort((a, b) => a.price - b.price);
     }
   },
   components: {Card, Modal, Discount}
