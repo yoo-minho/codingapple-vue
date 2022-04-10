@@ -39,7 +39,7 @@ export default {
       menus: ['Home', 'Products', 'About'],
       누른거: 0,
       products: data,
-      originProducts: '',
+      originProducts: [...data],
     }
   },
   methods: {
@@ -47,7 +47,7 @@ export default {
       this.신고수 += 1;
     },
     sortBack() {
-
+      this.products = [...this.originProducts];
     },
     sortPrice() {
       this.products.sort((a, b) => a.price - b.price);
