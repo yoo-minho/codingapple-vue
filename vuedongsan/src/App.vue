@@ -9,7 +9,7 @@
     <a v-for="(v, i) in ['Home','Products', 'About']" :key="i">{{ v }}</a>
   </div>
 
-  <Discount/>
+  <Discount v-if="isShowDiscount"/>
 
   <button @click="sortPrice">가격순정렬</button>
   <button @click="sortBack">되돌리기</button>
@@ -32,6 +32,7 @@ export default {
   name: 'App',
   data() {
     return {
+      isShowDiscount: true,
       모달창열렸니: false,
       price1: 60,
       price2: 70,
