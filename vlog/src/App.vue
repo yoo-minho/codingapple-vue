@@ -14,14 +14,18 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><router-link to="/list">List</router-link></a>
+            <a class="nav-link" href="#">
+              <router-link to="/list">List</router-link>
+            </a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
 
-  <router-view :blog="블로그글"></router-view>
+  <div class="mt-4">
+    <router-view :blog="블로그글"></router-view>
+  </div>
 </template>
 
 <script>

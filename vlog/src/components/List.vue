@@ -1,5 +1,10 @@
 <template>
-  <ListItem :v="v" v-for="(v,i) in blog" :key="i"/>
+  <ListItem
+      :v="v"
+      v-for="(v,i) in blog"
+      :key="i"
+      @click="$router.push(`/detail/${i}`)"
+  />
 </template>
 
 <script>
