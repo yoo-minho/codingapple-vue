@@ -1,4 +1,4 @@
-import {createWebHistory, createRouter} from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 import List from "@/components/List";
 import Home from "@/components/Home";
 import Detail from "@/components/Detail";
@@ -31,8 +31,11 @@ const routes = [
 ];
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes,
 });
+router.beforeEach((to, from) => {
+    console.log(to, from)
+})
 
 export default router;
