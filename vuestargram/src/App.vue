@@ -11,6 +11,7 @@
   </div>
 
   <Container
+      :selectFilterName="selectFilterName"
       :postData="postData"
       :step="step"
       :uploadImage="uploadImage"
@@ -38,8 +39,14 @@ export default {
       postData,
       step: 0,
       uploadImage: '',
-      writeContent: ''
+      writeContent: '',
+      selectFilterName: '',
     }
+  },
+  mounted() {
+    this.emitter.on('sendFilterName', (filterName) => {
+      this.selectFilterName = filterName;
+    })
   },
   methods: {
     upload(e) {
@@ -56,9 +63,13 @@ export default {
         date: "May 15",
         liked: false,
         content: this.writeContent,
-        filter: ""
+        filter: this.selectFilterName
       };
       this.postData = [post, ...this.postData];
+
+      this.uploadImage = '';
+      this.writeContent = '';
+      this.selectFilterName = '';
       this.step = 0;
     }
   }

@@ -1,5 +1,8 @@
 <template>
-  <div :class="filter" class="filter-item" :style="{backgroundImage:`url(${uploadImage})`}">
+  <div
+      @click="fire"
+      :class="filter" class="filter-item"
+      :style="{backgroundImage:`url(${uploadImage})`}">
     <slot name="a"></slot>
   </div>
 </template>
@@ -14,7 +17,11 @@ export default {
   data() {
     return {}
   },
-  methods: {}
+  methods: {
+    fire(e) {
+      this.emitter.emit('sendFilterName', e.target.innerText);
+    }
+  }
 }
 </script>
 
