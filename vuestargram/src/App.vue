@@ -15,11 +15,11 @@
       :postData="postData"
       :step="step"
       :uploadImage="uploadImage"
-      @addData="this.postData = [...this.postData, $event]"
+      @addData="this.getNextPost($event)"
       @write="this.writeContent = $event"
   />
 
-  <div class="footer">
+  <div v-if="step === 0" class="footer">
     <ul class="footer-button-plus">
       <input @change="upload" type="file" id="file" class="inputfile"/>
       <label for="file" class="input-plus">+</label>
@@ -28,15 +28,14 @@
 </template>
 
 <script>
-import postData from "./assets/data"
 import Container from "@/components/Container";
+import {mapMutations, mapState} from "vuex";
 
 export default {
   name: 'App',
   components: {Container},
   data() {
     return {
-      postData,
       step: 0,
       uploadImage: '',
       writeContent: '',
@@ -48,7 +47,11 @@ export default {
       this.selectFilterName = filterName;
     })
   },
+  computed: {
+    ...mapState(['postData'])
+  },
   methods: {
+    ...mapMutations(['getNextPost', 'addNewPost']),
     upload(e) {
       const files = e.target.files;
       this.uploadImage = URL.createObjectURL(files[0]);
@@ -65,7 +68,8 @@ export default {
         content: this.writeContent,
         filter: this.selectFilterName
       };
-      this.postData = [post, ...this.postData];
+
+      this.addNewPost(post);
 
       this.uploadImage = '';
       this.writeContent = '';

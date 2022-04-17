@@ -1,12 +1,13 @@
 <template>
   <div v-if="step === 0">
-    <Post :v=v v-for="(v, i) in postData" :key="i"/>
-    <button @click="more">더보기</button>
+    <Post :v=v :idx=i v-for="(v, i) in postData" :key="i"/>
+    <button @click="getData">더보기</button>
   </div>
 
   <!-- 필터선택페이지 -->
   <div v-if="step === 1">
-    <div :class="selectFilterName" class="upload-image" :style="{backgroundImage:`url(${uploadImage})`}"></div>
+    <div :class="selectFilterName" class="upload-image"
+         :style="{backgroundImage:`url(${uploadImage})`}"></div>
     <div class="filters">
       <FilterBox v-for="(filter, i) in filters" :filter="filter" :uploadImage="uploadImage" :key="i">
         <template v-slot:a>{{ filter }}</template>
@@ -16,7 +17,8 @@
 
   <!-- 글작성페이지 -->
   <div v-if="step === 2">
-    <div :class="selectFilterName" class="upload-image" :style="{backgroundImage:`url(${uploadImage})`}"></div>
+    <div :class="selectFilterName" class="upload-image"
+         :style="{backgroundImage:`url(${uploadImage})`}"></div>
     <div class="write">
       <textarea
           @input="$emit('write', $event.target.value)"
@@ -29,8 +31,8 @@
 
 <script>
 import Post from "@/components/Post";
-import axios from "axios";
 import FilterBox from "@/components/FilterBox";
+import {mapActions} from "vuex";
 
 export default {
   name: "Container",
@@ -48,16 +50,7 @@ export default {
     }
   },
   methods: {
-    async more() {
-      let res;
-      try {
-        res = await axios.get(`https://codingapple1.github.io/vue/more${this.더보기}.json`);
-        this.$emit('addData', res.data);
-        this.더보기++;
-      } catch (e) {
-        alert('더 이상 읎다.')
-      }
-    }
+    ...mapActions(['getData'])
   },
   components: {FilterBox, Post}
 }

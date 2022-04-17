@@ -1,10 +1,14 @@
 <template>
   <div class="post">
     <div class="post-header">
-      <div class="profile" :style="{backgroundImage: `url(${v.userImage})`}"></div>
+      <div class="profile"
+           :style="{backgroundImage: `url(${v.userImage})`}"></div>
       <span class="profile-name">{{ v.name }}</span>
     </div>
-    <div :class="v.filter" class="post-body" :style="{backgroundImage: `url(${v.postImage})`}"></div>
+    <div @click="this.likePost(idx)"
+         :class="v.filter"
+         class="post-body"
+         :style="{backgroundImage: `url(${v.postImage})`}"></div>
     <div class="post-content">
       <p>{{ v.likes }} Likes</p>
       <p><strong>{{ v.name }}</strong> {{ v.content }}</p>
@@ -14,13 +18,19 @@
 </template>
 
 <script>
+import {mapMutations} from "vuex";
+
 export default {
   name: "Post",
   props: {
-    v: Object
+    v: Object,
+    idx: Number,
   },
   data() {
     return {}
+  },
+  methods: {
+    ...mapMutations(['likePost'])
   }
 }
 </script>
