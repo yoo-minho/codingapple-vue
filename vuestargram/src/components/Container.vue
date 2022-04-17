@@ -27,12 +27,19 @@
       ></textarea>
     </div>
   </div>
+
+  <div v-if="step === 3">
+    <MyPage/>
+  </div>
+
+
 </template>
 
 <script>
 import Post from "@/components/Post";
 import FilterBox from "@/components/FilterBox";
 import {mapActions} from "vuex";
+import MyPage from "@/components/MyPage";
 
 export default {
   name: "Container",
@@ -52,7 +59,7 @@ export default {
   methods: {
     ...mapActions(['getData'])
   },
-  components: {FilterBox, Post}
+  components: {MyPage, FilterBox, Post}
 }
 </script>
 
